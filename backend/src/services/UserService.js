@@ -98,9 +98,35 @@ const getUserByTelephoneAndPassword = async (telephone, password) => {
   }
 }
 
+const getUserByEmail = async (email) => {
+  try {
+    const user = await userRepository.getUserByEmail(email);
+    if(user) {
+      return {
+        statusCode: 200,
+        data: user
+      }
+    } else {
+      return {
+        statusCode: 404,
+        data: { message: 'Usuário não encontrado.' }
+      }
+    }
+  } catch (error) {
+    return {
+      statusCode: 500,
+      data: {
+        message: 'Não foi possível obter o usuário.',
+        error: error.message
+      }
+    }
+  } 
+}
+
 //  Tornando as funções disponíveis para outros arquivos
 module.exports = {
   createUser,
   getUsers,
-  getUserByTelephoneAndPassword
+  getUserByTelephoneAndPassword,
+  getUserByEmail
 }
