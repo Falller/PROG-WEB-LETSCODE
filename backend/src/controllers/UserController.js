@@ -22,3 +22,5 @@ module.exports = {
   getUser,
   getUserByTelephoneAndPassword
 }
+
+//teste
